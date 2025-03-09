@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-function Task({ task, toggleActive, deleteTask, updateTask,onlyActive }) {
+import { toast } from 'react-toastify'
+function Task({ task, toggleActive, deleteTask, updateTask, onlyActive }) {
 
     const [editable, setEditable] = useState(false)
     const [message, setMessage] = useState(task.message)
@@ -7,7 +8,7 @@ function Task({ task, toggleActive, deleteTask, updateTask,onlyActive }) {
     const editTodo = () => {
         updateTask(task.id, message)
     }
-    if(onlyActive && !task.active)
+    if (onlyActive && !task.active)
         return;
     return (
         <div
@@ -18,7 +19,9 @@ function Task({ task, toggleActive, deleteTask, updateTask,onlyActive }) {
                 type="checkbox"
                 className="cursor-crosshair"
                 checked={!task.active}
-                onChange={() => toggleActive(task.id)}
+                onChange={() => {toggleActive(task.id)
+                }}
+                disabled={editable}
             />
             {
                 editable ? (<input
@@ -33,7 +36,10 @@ function Task({ task, toggleActive, deleteTask, updateTask,onlyActive }) {
                 className="inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 disabled:opacity-50"
                 onClick={() => {
                     if (!task.active) return;
-
+                    if (message == "" && editable) {
+                        toast.error("Message cannot be empty")
+                        return
+                    }
                     if (editable) {
                         editTodo();
                     }

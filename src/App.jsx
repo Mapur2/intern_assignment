@@ -53,7 +53,7 @@ function App() {
       <ToastContainer autoClose={5000} closeOnClick={true} position='top-center' />
 
       <div className="min-h-screen py-2 w-full text-2xl">
-        <div className="w-full max-w-4xl mx-auto shadow-md rounded-lg px-4 py-3">
+        <div className="w-full max-w-4xl mx-auto shadow-lg rounded-lg px-4 py-3">
           <h1 className="text-2xl font-bold text-center mb-8 mt-2">Task Manager</h1>
           <div className="mb-4">
             <form onSubmit={add} className="flex">
